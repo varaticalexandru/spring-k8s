@@ -1,0 +1,13 @@
+#!/bin/bash
+
+image_name=$(echo $1 | sed 's/\([A-Z]\)/-\L\1/g;s/^-//') && \
+version=$2 && \
+
+cp config/Dockerfile $1/Dockerfile && \
+cd $1 && \
+
+./gradlew clean build -x test && \
+docker build . -t alexandruvaratic/$image_name:$version && \
+docker push alexandruvaratic/$image_name:$version && \
+
+rm Dockerfile

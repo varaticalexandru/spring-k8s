@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: norris-api
+  labels:
+    app: norris-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: norris-api
+  template:
+    metadata:
+      labels:
+        app: norris-api
+    spec:
+      containers:
+        - name: norris-api
+          image: alexandruvaratic/norris-api:1.0.1
+          ports:
+            - containerPort: 8002
+          env:
+            - name: SPRING_ADMIN
+              value: http://spring-admin/spring-admin
+            - name: SPRING_MVC_SERVLET_PATH
+              value: "/norris-api"

@@ -1,0 +1,23 @@
+norris:
+    external-api:
+      url: "https://api.chucknorris.io/jokes/random"
+
+server:
+  port: 8002
+
+spring:
+  application:
+    name: norris-api
+  boot:
+    admin:
+      client:
+        url: ${SPRING_ADMIN:http://localhost:8000/}
+        instance:
+          service-host-type: ip
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
